@@ -1,0 +1,99 @@
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  /* Reset default margin */
+}
+
+table {
+  border-collapse: collapse; /* 👈 Junta los bordes */
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+
+.asterisk {
+  color: var(--rosy);
+}
+
+.divider {
+  height: 1px;
+  background-color: #686767;
+  margin: 20px auto; 
+  width: 95%;
+}
+
+.flex-row {
+  display: flex;
+  gap: 10px;
+}
+
+.main-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin: 0;
+}
+
+.top-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.distribution{
+  display: flex;
+  justify-items:space-around;
+}
+
+.contenedor {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100px;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+}
+
+.dropdown {
+  padding: 15px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	margin-bottom: 10px;
+	width: 100%;
+	box-sizing: border-box;
+	font-family: montserrat;
+	color: #2C3E50;
+	font-size: 13px;
+}
+.container-form {
+  display: flex;
+  gap: 20px;
+}
+
+.item:nth-child(1),
+.item:nth-child(2),
+.item:nth-child(3) {
+  flex-grow: 1;
+}
+
+.container-up {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.item:nth-child(2) {
+  flex-grow: 1;
+}

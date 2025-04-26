@@ -1,0 +1,7 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:web="http://soap.rentcar.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:getCars/>
+   </soapenv:Body>
+</soapenv:Envelope>

@@ -12,12 +12,11 @@ type Car = {
 };
 
 function CarList({ carList }: any) {
-  const [cars, setCars] = useState<Car[]>([]);
+  const [cars, setCars] = useState<Car[]>([]); //
   const [paginaActual, setPaginaActual] = useState(1);
   const elementosPorPagina = 10;
-
+  // pager
   const totalPaginas = Math.ceil(cars.length / elementosPorPagina);
-
   const indiceInicio = (paginaActual - 1) * elementosPorPagina;
   const indiceFinal = indiceInicio + elementosPorPagina;
   const datosPagina = cars.slice(indiceInicio, indiceFinal);

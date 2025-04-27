@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form"
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-
+// yup schema to validate form
 const schema = yup.object({
     name: yup.string().required("El nombre es obligatorio"),
     dni: yup.number().typeError("Debe ser un número").integer().required("El DNI es obligatorio"),
@@ -15,6 +15,7 @@ const schema = yup.object({
     price: yup.number().required("Debe de colocar el precio del vehículo"),
   });
 
+// input style  
 const Input = styled.input`
   padding: 15px;
 	border: 1px solid #ccc;
@@ -43,8 +44,9 @@ const Button = styled.button`
 
 
 function CarForm() {
+    // options for the dropdown
     const modelOptions = [
-        { label: "Sedán", value: "Sedan" },
+        { label: "Sedan", value: "Sedan" },
         { label: "Hatchback", value: "Hatchback" },
         { label: "SUV", value: "SUV" },
         { label: "Deportivo", value: "Deportivo" },
@@ -59,19 +61,21 @@ function CarForm() {
         { label: "Chevrolet", value: "Chevrolet" },
     ];
 
+    // react hook form
     const {
         register,
         handleSubmit,
         reset,
+        formState: { errors },
     } = useForm({
         resolver: yupResolver(schema),
     })
 
   
-
+    // sends the form to create a new car
     const onSubmit = async (data: any) => {
         try {
-            const payload = {
+            const payload = { // transforms the dni and price value to string
                 ...data,
                 dni: parseInt(data.dni.toString(), 10),
                 price: parseInt(data.price.toString())
@@ -86,55 +90,63 @@ function CarForm() {
 
  
     return (
-        <div style={{ 'width': '50%', 'height': '50%', border: '1px solid black', padding: '20px 0px 20px 0px', borderRadius: '20px' }}>
+        <div style={{ 'width': '50%', 'height': '50%', border: '1px solid black', padding: '20px 0px 20px 0px', borderRadius: '20px',backgroundColor:'white'}}>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
-                    <h2 style={{ margin: '0px 0px 0px 30px' }}>Datos del vendedor:</h2>
+                    <h2 style={{ margin: '0px 0px 0px 30px', fontFamily:'monospace' }}>Datos del vendedor:</h2>
                 </div>
                 <div className='flex-row container-up'>
                     <div className='top-inputs item' style={{margin:'0px 30px 0px 30px'}} >
                         <div style={{display:'flex'}}>
-                            <label htmlFor="">Nombre completo </label><span>*</span> 
+                            <label htmlFor="">Nombre completo </label><span style={{color:'red'}}>*</span> 
                         </div>
-                        <Input {...register("name")} />
-                    </div>
+                        {errors.name ? <Input {...register("name", { valueAsNumber: true } ) } style={{border:'1px solid red'}} /> : <Input {...register("name", { valueAsNumber: true })} />}
+                        
+                   </div>
                     <div className='top-inputs' style={{margin:'0px 30px 0px 30px'}}>
                         <div>
-                            <label htmlFor="">Rut Vendedor</label><span>*</span>
+                            <label htmlFor="">Rut Vendedor</label><span style={{color:'red'}}>*</span> 
                         </div>
 
-                        <Input {...register("dni", { valueAsNumber: true })} />
+                        {errors.dni ?  <Input {...register("dni", { valueAsNumber: true })} style={{border:'1px solid red'}}/> : <Input {...register("dni", { valueAsNumber: true })} />}
+                        
                     </div>
                 </div>
                 <div className="divider"></div>
                 <div>
 
-                    <h2 style={{ margin: '0px 0px 0px 30px' }}>Datos del vehiculo:</h2>
+                    <h2 style={{ margin: '0px 0px 0px 30px',fontFamily:'monospace'  }}>Datos del vehiculo:</h2>
                 </div>
                 <div style={{margin:'0px 30px 0px 30px'}} className='flex-row container-form'>
 
                     <div className='item'>
                         <div className='top-inputs'>
-                            <label htmlFor="">Patente vehiculo <span>*</span></label>
+                            <label htmlFor="">Patente vehiculo <span style={{color:'red'}}>*</span> </label>
                         </div>
-                        <Input {...register("patent")} />
+                        {errors.patent ? <Input {...register("patent")} style={{border:'1px solid red'}}/> : <Input {...register("patent")} />}
                     </div>
                     <div className='item'>
                         <div className='top-inputs'>
-                            <label htmlFor="">Marca del vehiculo<span>*</span></label>
+                            <label htmlFor="">Marca del vehiculo<span style={{color:'red'}}>*</span> </label>
                         </div>
-                        <select {...register("brand")} style={{width:'100'}} className='dropdown'>
+                        {errors.model ? <select {...register("brand")} style={{width:'100',border:'1px solid red'}} className='dropdown'>
                         {brandOptions.map((opcion) => (
                                 <option key={opcion.value} value={opcion.value}>
                                     {opcion.label}
                                 </option>
                             ))}
-                        </select>
+                        </select> : <select {...register("brand")} style={{width:'100'}} className='dropdown'>
+                        {brandOptions.map((opcion) => (
+                                <option key={opcion.value} value={opcion.value}>
+                                    {opcion.label}
+                                </option>
+                            ))}
+                        </select>} 
 
                     </div>
                     <div className='item'>
                         <div className='top-inputs'>
-                            <label htmlFor="">Modelo del vehiculo<span>*</span></label>
+                            <label  htmlFor="">Modelo del vehiculo<span style={{color:'red'}}>*</span> </label>
                         </div>
                         <select {...register("model")} className='dropdown'>
                             {modelOptions.map((opcion) => (
@@ -148,9 +160,9 @@ function CarForm() {
                 <div className='container-form'>
                     <div className='item' style={{margin:'0px 300px 0px 30px'}}>
                         <div className='top-inputs'>
-                            <label htmlFor="">Precio del vehiculo<span>*</span>{} </label>
+                            <label htmlFor="">Precio del vehiculo<span style={{color:'red'}}>*</span></label>
                         </div>
-                        <Input {...register("price", { valueAsNumber: true })} />
+                        {errors.price ? <Input {...register("price", { valueAsNumber: true })} style={{border:'1px solid red'}}/> : <Input {...register("price", { valueAsNumber: true })} />}
                     </div>
                     <div className='item'>
 

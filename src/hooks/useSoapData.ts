@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const useSoapData = (): any => {
-  const [data, setData] = useState(null);      // Para guardar los datos del servicio
-  const [loading, setLoading] = useState(true); // Para mostrar un spinner o mensaje de carga
-  const [error, setError] = useState(null);     // Para manejar errores
+  const [data, setData] = useState(null);      // To save the service data
+  const [loading, setLoading] = useState(true); // show a loading message
+  const [error, setError] = useState(null);     // to manage errors
 
   useEffect(() => {
     const getAllCars = async () =>  {

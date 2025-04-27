@@ -5,18 +5,17 @@ import CarForm from "./components/CarForm";
 
 import useSoapData from "./hooks/useSoapData";
 function App() {
-  // const { data, loading, error } = useSoapData();
+  const { data, loading, error } = useSoapData();
 
-  // if (error) return <div>error...</div>;
+  if (error) return <div>error...</div>;
 
   return (
-    <div 
+    <div
       className="main-div"
-      style={{ display: "flex", flexDirection: "column", gap: "70px", padding: "20px",backgroundColor:'#F5F5F5'}}
+      style={{ display: "flex", flexDirection: "column", gap: "70px", padding: "20px",height:'100%',width:'100%'}}
       >
-      <CarForm/>
       <h1>Respuesta del Servicio SOAP</h1>
-      {/* {loading ? <p>Cargando...</p> : <CarList carList={data.cars}/>} */}
+      {loading ? <p>Cargando...</p> : <CarList carList={data.cars}/>}
     </div>
   );
 }

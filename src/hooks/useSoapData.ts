@@ -19,7 +19,6 @@ const useSoapData = (): any => {
         setLoading(false);
       } 
     };
-
     getAllCars();
   }, []);
 

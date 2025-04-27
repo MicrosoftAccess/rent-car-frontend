@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
-
+import styled from 'styled-components';
+import { IoIosAddCircle } from "react-icons/io";
 type Car = {
   id: number;
   name: string;
@@ -10,6 +11,19 @@ type Car = {
   patent: string;
   price: number;
 };
+
+const Button = styled.button`
+   background-color: 	#008000;
+  color: white;
+  padding: 10px 40px;
+  border: none;
+  border-radius: 999px; 
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+`;
+
 
 function CarList({ carList }: any) {
   const [cars, setCars] = useState<Car[]>([]); //
@@ -49,13 +63,23 @@ function CarList({ carList }: any) {
       console.error("Error al eliminar auto:", error);
     }
   };
+  console.log(carList)
 
   return (
     <div
-      style={{ width: "60%", height: "40%", overflowY: "auto" }}
-      className=""
+      style={{ width: "100%", height: "100%", overflowY: "auto",display:'flex',justifyContent:'center',gap:'20px' }}
     >
-      <h2 style={{ fontFamily: "monospace" }}>Lista autos rentados</h2>
+      <div style={{width:'40%',height:'60%'}}>
+
+      <div className="container-space">
+          <h2 style={{ fontFamily: "monospace" }}>Lista autos rentados</h2>
+          <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
+          
+          <a href="/">
+          <Button>Añadir</Button>
+          </a>
+          </div>
+      </div>
       <table>
         <thead>
           <tr>
@@ -100,6 +124,7 @@ function CarList({ carList }: any) {
             </button>
           ))}
         </div>
+      </div>
       </div>
     </div>
   );
